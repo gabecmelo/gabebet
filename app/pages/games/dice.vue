@@ -139,16 +139,16 @@ watch(() => authStore.user, (user) => {
 </script>
 
 <template>
-  <div class="max-w-6xl mx-auto">
+  <div class="max-w-6xl mx-auto w-full">
     <!-- Header -->
-    <div class="mb-8">
-      <h1 class="text-3xl font-bold flex items-center gap-3">
-        <div class="w-12 h-12 bg-emerald-500/20 rounded-xl flex items-center justify-center">
-          <UIcon name="i-lucide-dice-5" class="w-6 h-6 text-emerald-400" />
+    <div class="mb-6 md:mb-8">
+      <h1 class="text-2xl md:text-3xl font-bold flex items-center gap-3">
+        <div class="w-10 h-10 md:w-12 md:h-12 bg-emerald-500/20 rounded-xl flex items-center justify-center">
+          <UIcon name="i-lucide-dice-5" class="w-5 h-5 md:w-6 md:h-6 text-emerald-400" />
         </div>
         Jogo de Dados
       </h1>
-      <p class="text-gray-400 mt-2">
+      <p class="text-gray-400 mt-2 text-sm md:text-base">
         Escolha um alvo e aposte se o resultado será maior ou menor.
       </p>
     </div>
@@ -156,29 +156,29 @@ watch(() => authStore.user, (user) => {
     <!-- Auth Required Message -->
     <div
       v-if="!authStore.isAuthenticated"
-      class="bg-gray-900 rounded-2xl border border-gray-800 p-8 text-center"
+      class="bg-gray-900 rounded-2xl border border-gray-800 p-6 md:p-8 text-center"
     >
-      <UIcon name="i-lucide-lock" class="w-16 h-16 text-gray-600 mx-auto mb-4" />
-      <h2 class="text-xl font-bold mb-2">Faça login para jogar</h2>
-      <p class="text-gray-400 mb-6">
+      <UIcon name="i-lucide-lock" class="w-12 h-12 md:w-16 md:h-16 text-gray-600 mx-auto mb-4" />
+      <h2 class="text-lg md:text-xl font-bold mb-2">Faça login para jogar</h2>
+      <p class="text-gray-400 mb-6 text-sm md:text-base">
         Você precisa estar logado para fazer apostas.
       </p>
-      <div class="flex justify-center gap-4">
-        <NuxtLink to="/login">
-          <UButton color="neutral" variant="outline">Entrar</UButton>
+      <div class="flex flex-col sm:flex-row justify-center gap-3">
+        <NuxtLink to="/login" class="w-full sm:w-auto">
+          <UButton color="neutral" variant="outline" class="w-full">Entrar</UButton>
         </NuxtLink>
-        <NuxtLink to="/register">
-          <UButton class="bg-emerald-500 hover:bg-emerald-600">Cadastrar</UButton>
+        <NuxtLink to="/register" class="w-full sm:w-auto">
+          <UButton class="bg-emerald-500 hover:bg-emerald-600 w-full">Cadastrar</UButton>
         </NuxtLink>
       </div>
     </div>
 
     <!-- Game Interface -->
-    <div v-else class="grid lg:grid-cols-3 gap-6">
+    <div v-else class="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
       <!-- Betting Panel -->
-      <div class="lg:col-span-1 space-y-6">
+      <div class="lg:col-span-1 space-y-4 md:space-y-6 order-2 lg:order-1">
         <!-- Bet Amount -->
-        <div class="bg-gray-900 rounded-2xl border border-gray-800 p-6">
+        <div class="bg-gray-900 rounded-2xl border border-gray-800 p-4 md:p-6">
           <label class="block text-sm font-medium text-gray-400 mb-3">
             Valor da Aposta
           </label>
@@ -236,7 +236,7 @@ watch(() => authStore.user, (user) => {
         </div>
 
         <!-- Target Selection -->
-        <div class="bg-gray-900 rounded-2xl border border-gray-800 p-6">
+        <div class="bg-gray-900 rounded-2xl border border-gray-800 p-4 md:p-6">
           <label class="block text-sm font-medium text-gray-400 mb-3">
             Alvo: <span class="text-white font-bold">{{ target }}</span>
           </label>
@@ -255,53 +255,53 @@ watch(() => authStore.user, (user) => {
         </div>
 
         <!-- Bet Type -->
-        <div class="bg-gray-900 rounded-2xl border border-gray-800 p-6">
+        <div class="bg-gray-900 rounded-2xl border border-gray-800 p-4 md:p-6">
           <label class="block text-sm font-medium text-gray-400 mb-3">
             Apostar em
           </label>
-          <div class="grid grid-cols-2 gap-3">
+          <div class="grid grid-cols-2 gap-2 md:gap-3">
             <button
               :class="[
-                'py-4 rounded-xl font-bold transition-all',
+                'py-3 md:py-4 rounded-xl font-bold transition-all text-sm md:text-base',
                 betType === 'under'
                   ? 'bg-red-500 text-white'
                   : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
               ]"
               @click="betType = 'under'"
             >
-              <UIcon name="i-lucide-arrow-down" class="w-5 h-5 mx-auto mb-1" />
+              <UIcon name="i-lucide-arrow-down" class="w-4 h-4 md:w-5 md:h-5 mx-auto mb-1" />
               Menor que {{ target }}
             </button>
             <button
               :class="[
-                'py-4 rounded-xl font-bold transition-all',
+                'py-3 md:py-4 rounded-xl font-bold transition-all text-sm md:text-base',
                 betType === 'over'
                   ? 'bg-emerald-500 text-white'
                   : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
               ]"
               @click="betType = 'over'"
             >
-              <UIcon name="i-lucide-arrow-up" class="w-5 h-5 mx-auto mb-1" />
+              <UIcon name="i-lucide-arrow-up" class="w-4 h-4 md:w-5 md:h-5 mx-auto mb-1" />
               Maior que {{ target }}
             </button>
           </div>
         </div>
 
         <!-- Stats -->
-        <div class="bg-gray-900 rounded-2xl border border-gray-800 p-6">
+        <div class="bg-gray-900 rounded-2xl border border-gray-800 p-4 md:p-6">
           <div class="grid grid-cols-2 gap-4 text-center">
             <div>
-              <p class="text-sm text-gray-400">Multiplicador</p>
-              <p class="text-2xl font-bold text-emerald-400">{{ multiplier }}×</p>
+              <p class="text-xs md:text-sm text-gray-400">Multiplicador</p>
+              <p class="text-xl md:text-2xl font-bold text-emerald-400">{{ multiplier }}×</p>
             </div>
             <div>
-              <p class="text-sm text-gray-400">Chance</p>
-              <p class="text-2xl font-bold">{{ winProbability.toFixed(1) }}%</p>
+              <p class="text-xs md:text-sm text-gray-400">Chance</p>
+              <p class="text-xl md:text-2xl font-bold">{{ winProbability.toFixed(1) }}%</p>
             </div>
           </div>
           <div class="mt-4 pt-4 border-t border-gray-700 text-center">
-            <p class="text-sm text-gray-400">Ganho Potencial</p>
-            <p class="text-2xl font-bold text-yellow-400">
+            <p class="text-xs md:text-sm text-gray-400">Ganho Potencial</p>
+            <p class="text-xl md:text-2xl font-bold text-yellow-400">
               R$ {{ potentialPayout.toFixed(2) }}
             </p>
           </div>
@@ -310,7 +310,7 @@ watch(() => authStore.user, (user) => {
         <!-- Bet Button -->
         <UButton
           size="xl"
-          class="w-full py-6 text-lg font-bold"
+          class="w-full py-4 md:py-6 text-base md:text-lg font-bold"
           :class="canBet ? 'bg-emerald-500 hover:bg-emerald-600' : 'bg-gray-700 cursor-not-allowed'"
           :disabled="!canBet"
           :loading="isRolling"
@@ -320,28 +320,28 @@ watch(() => authStore.user, (user) => {
             Rolando...
           </template>
           <template v-else>
-            <UIcon name="i-lucide-dice-5" class="w-6 h-6 mr-2" />
+            <UIcon name="i-lucide-dice-5" class="w-5 h-5 md:w-6 md:h-6 mr-2" />
             Apostar R$ {{ betAmount.toFixed(2) }}
           </template>
         </UButton>
       </div>
 
       <!-- Game Display -->
-      <div class="lg:col-span-2">
+      <div class="lg:col-span-2 order-1 lg:order-2">
         <!-- Result Display -->
-        <div class="bg-gray-900 rounded-2xl border border-gray-800 p-8 min-h-[400px] flex items-center justify-center">
+        <div class="bg-gray-900 rounded-2xl border border-gray-800 p-6 md:p-8 min-h-[280px] md:min-h-[400px] flex items-center justify-center">
           <div v-if="isRolling" class="text-center">
-            <div class="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-3xl flex items-center justify-center animate-bounce">
-              <UIcon name="i-lucide-dice-5" class="w-16 h-16 animate-spin" />
+            <div class="w-24 h-24 md:w-32 md:h-32 mx-auto mb-4 md:mb-6 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-3xl flex items-center justify-center animate-bounce">
+              <UIcon name="i-lucide-dice-5" class="w-12 h-12 md:w-16 md:h-16 animate-spin" />
             </div>
-            <p class="text-xl text-gray-400">Rolando os dados...</p>
+            <p class="text-lg md:text-xl text-gray-400">Rolando os dados...</p>
           </div>
 
           <div v-else-if="showResult && lastResult" class="text-center">
             <!-- Result Number -->
             <div
               :class="[
-                'w-32 h-32 mx-auto mb-6 rounded-3xl flex items-center justify-center text-5xl font-black',
+                'w-24 h-24 md:w-32 md:h-32 mx-auto mb-4 md:mb-6 rounded-3xl flex items-center justify-center text-4xl md:text-5xl font-black',
                 lastResult.won
                   ? 'bg-gradient-to-br from-emerald-500 to-emerald-600'
                   : 'bg-gradient-to-br from-red-500 to-red-600'

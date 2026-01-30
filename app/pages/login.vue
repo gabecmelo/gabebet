@@ -52,30 +52,30 @@ watch(
 </script>
 
 <template>
-  <div class="min-h-[80vh] flex items-center justify-center">
+  <div class="min-h-[70vh] md:min-h-[80vh] flex items-center justify-center px-4">
     <div class="w-full max-w-md">
       <!-- Card -->
-      <div class="bg-gray-900 rounded-2xl border border-gray-800 p-8">
+      <div class="bg-gray-900 rounded-2xl border border-gray-800 p-5 md:p-8">
         <!-- Header -->
-        <div class="text-center mb-8">
-          <div class="w-16 h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <span class="text-3xl font-bold">G</span>
+        <div class="text-center mb-6 md:mb-8">
+          <div class="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-3 md:mb-4">
+            <span class="text-2xl md:text-3xl font-bold">G</span>
           </div>
-          <h1 class="text-2xl font-bold mb-2">Entrar no GabeBet</h1>
-          <p class="text-gray-400">Acesse sua conta para começar a jogar</p>
+          <h1 class="text-xl md:text-2xl font-bold mb-2">Entrar no GabeBet</h1>
+          <p class="text-gray-400 text-sm md:text-base">Acesse sua conta para começar a jogar</p>
         </div>
 
         <!-- Error Alert -->
         <div
           v-if="authStore.error"
-          class="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-xl flex items-center gap-3"
+          class="mb-4 md:mb-6 p-3 md:p-4 bg-red-500/10 border border-red-500/30 rounded-xl flex items-center gap-3"
         >
-          <UIcon name="i-lucide-alert-circle" class="w-5 h-5 text-red-400" />
+          <UIcon name="i-lucide-alert-circle" class="w-5 h-5 text-red-400 flex-shrink-0" />
           <p class="text-sm text-red-400">{{ authStore.error }}</p>
         </div>
 
         <!-- Login Form -->
-        <UForm :state="formState" class="space-y-6" @submit="onSubmit">
+        <UForm :state="formState" class="space-y-4 md:space-y-6" @submit="onSubmit">
           <UFormField label="E-mail" name="email" required>
             <UInput
               v-model="formState.email"

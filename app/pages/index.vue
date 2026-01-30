@@ -45,51 +45,51 @@ const featuredGames = [
 </script>
 
 <template>
-  <div class="max-w-6xl mx-auto">
+  <div class="max-w-6xl mx-auto w-full">
     <!-- Hero Section -->
-    <section class="mb-12">
-      <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-8 border border-gray-700 relative overflow-hidden">
+    <section class="mb-8 md:mb-12">
+      <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-5 md:p-8 border border-gray-700 relative overflow-hidden">
         <!-- Background Pattern -->
         <div class="absolute inset-0 opacity-5">
           <div class="absolute inset-0 bg-gradient-to-br from-emerald-500 to-transparent" />
         </div>
 
         <div class="relative z-10">
-          <h1 class="text-4xl md:text-5xl font-bold mb-4">
+          <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4">
             Bem-vindo ao
             <span class="bg-gradient-to-r from-emerald-400 to-emerald-600 bg-clip-text text-transparent">
               GabeBet
             </span>
           </h1>
-          <p class="text-xl text-gray-400 mb-6 max-w-2xl">
+          <p class="text-base md:text-xl text-gray-400 mb-5 md:mb-6 max-w-2xl">
             Experimente a emoção das apostas em um ambiente seguro e simulado.
             Jogue com responsabilidade!
           </p>
 
-          <div v-if="!authStore.isAuthenticated" class="flex flex-wrap gap-4">
-            <NuxtLink to="/register">
-              <UButton size="lg" class="bg-emerald-500 hover:bg-emerald-600">
+          <div v-if="!authStore.isAuthenticated" class="flex flex-col sm:flex-row gap-3 md:gap-4">
+            <NuxtLink to="/register" class="w-full sm:w-auto">
+              <UButton size="lg" class="bg-emerald-500 hover:bg-emerald-600 w-full sm:w-auto">
                 <UIcon name="i-lucide-rocket" class="w-5 h-5 mr-2" />
                 Começar Agora
               </UButton>
             </NuxtLink>
-            <NuxtLink to="/login">
-              <UButton size="lg" color="neutral" variant="outline">
+            <NuxtLink to="/login" class="w-full sm:w-auto">
+              <UButton size="lg" color="neutral" variant="outline" class="w-full sm:w-auto">
                 Já tenho conta
               </UButton>
             </NuxtLink>
           </div>
 
-          <div v-else class="flex flex-wrap gap-4">
-            <NuxtLink to="/games/dice">
-              <UButton size="lg" class="bg-emerald-500 hover:bg-emerald-600">
+          <div v-else class="flex flex-col sm:flex-row gap-3 md:gap-4">
+            <NuxtLink to="/games/dice" class="w-full sm:w-auto">
+              <UButton size="lg" class="bg-emerald-500 hover:bg-emerald-600 w-full sm:w-auto">
                 <UIcon name="i-lucide-play" class="w-5 h-5 mr-2" />
                 Jogar Dados
               </UButton>
             </NuxtLink>
-            <div class="flex items-center gap-3 bg-gray-800/50 px-4 py-2 rounded-xl">
+            <div class="flex items-center justify-center gap-3 bg-gray-800/50 px-4 py-2 rounded-xl">
               <UIcon name="i-lucide-wallet" class="w-5 h-5 text-emerald-400" />
-              <span class="text-lg">
+              <span class="text-base md:text-lg">
                 Saldo: <strong>R$ {{ authStore.userBalance.toFixed(2) }}</strong>
               </span>
             </div>
@@ -100,12 +100,12 @@ const featuredGames = [
 
     <!-- Featured Games -->
     <section>
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-        <UIcon name="i-lucide-gamepad-2" class="w-7 h-7 text-emerald-400" />
+      <h2 class="text-xl md:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-3">
+        <UIcon name="i-lucide-gamepad-2" class="w-6 h-6 md:w-7 md:h-7 text-emerald-400" />
         Jogos em Destaque
       </h2>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
         <div
           v-for="game in featuredGames"
           :key="game.id"
@@ -119,12 +119,12 @@ const featuredGames = [
           <NuxtLink
             :to="game.available ? game.path : '#'"
             :class="{ 'pointer-events-none': !game.available }"
-            class="block p-6"
+            class="block p-4 md:p-6"
           >
             <!-- Icon -->
             <div
               :class="[
-                'w-16 h-16 rounded-2xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110',
+                'w-12 h-12 md:w-16 md:h-16 rounded-2xl flex items-center justify-center mb-3 md:mb-4 transition-transform group-hover:scale-110',
                 game.color === 'emerald' && 'bg-emerald-500/20',
                 game.color === 'orange' && 'bg-orange-500/20',
                 game.color === 'purple' && 'bg-purple-500/20',
@@ -133,7 +133,7 @@ const featuredGames = [
               <UIcon
                 :name="game.icon"
                 :class="[
-                  'w-8 h-8',
+                  'w-6 h-6 md:w-8 md:h-8',
                   game.color === 'emerald' && 'text-emerald-400',
                   game.color === 'orange' && 'text-orange-400',
                   game.color === 'purple' && 'text-purple-400',
@@ -142,11 +142,11 @@ const featuredGames = [
             </div>
 
             <!-- Content -->
-            <h3 class="text-xl font-bold mb-2">{{ game.name }}</h3>
-            <p class="text-gray-400 text-sm">{{ game.description }}</p>
+            <h3 class="text-lg md:text-xl font-bold mb-2">{{ game.name }}</h3>
+            <p class="text-gray-400 text-xs md:text-sm">{{ game.description }}</p>
 
             <!-- Badge -->
-            <div class="mt-4">
+            <div class="mt-3 md:mt-4">
               <span
                 v-if="game.available"
                 class="inline-flex items-center gap-1 text-xs bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded-full"
@@ -168,11 +168,11 @@ const featuredGames = [
     </section>
 
     <!-- Info Cards -->
-    <section class="mt-12 grid md:grid-cols-3 gap-6">
-      <div class="bg-gray-900 rounded-xl p-6 border border-gray-800">
-        <UIcon name="i-lucide-shield-check" class="w-8 h-8 text-emerald-400 mb-4" />
-        <h3 class="font-bold mb-2">Ambiente Seguro</h3>
-        <p class="text-sm text-gray-400">
+    <section class="mt-8 md:mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+      <div class="bg-gray-900 rounded-xl p-4 md:p-6 border border-gray-800">
+        <UIcon name="i-lucide-shield-check" class="w-6 h-6 md:w-8 md:h-8 text-emerald-400 mb-3 md:mb-4" />
+        <h3 class="font-bold mb-2 text-sm md:text-base">Ambiente Seguro</h3>
+        <p class="text-xs md:text-sm text-gray-400">
           Todas as apostas são simuladas. Nenhum dinheiro real envolvido.
         </p>
       </div>

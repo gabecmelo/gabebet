@@ -55,49 +55,49 @@ const gameTypeIcons: Record<string, string> = {
 </script>
 
 <template>
-  <div class="max-w-6xl mx-auto">
+  <div class="max-w-6xl mx-auto w-full">
     <!-- Header -->
-    <div class="mb-8">
-      <h1 class="text-3xl font-bold flex items-center gap-3">
-        <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center">
-          <UIcon name="i-lucide-history" class="w-6 h-6 text-blue-400" />
+    <div class="mb-6 md:mb-8">
+      <h1 class="text-2xl md:text-3xl font-bold flex items-center gap-3">
+        <div class="w-10 h-10 md:w-12 md:h-12 bg-blue-500/20 rounded-xl flex items-center justify-center">
+          <UIcon name="i-lucide-history" class="w-5 h-5 md:w-6 md:h-6 text-blue-400" />
         </div>
         Histórico de Apostas
       </h1>
-      <p class="text-gray-400 mt-2">
+      <p class="text-gray-400 mt-2 text-sm md:text-base">
         Veja todas as suas apostas e estatísticas.
       </p>
     </div>
 
     <!-- Stats Cards -->
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-6 md:mb-8">
       <!-- Total Bets -->
-      <div class="bg-gray-900 rounded-xl border border-gray-800 p-6">
-        <div class="flex items-center gap-3 mb-3">
-          <div class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center">
-            <UIcon name="i-lucide-hash" class="w-5 h-5 text-gray-400" />
+      <div class="bg-gray-900 rounded-xl border border-gray-800 p-4 md:p-6">
+        <div class="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
+          <div class="w-8 h-8 md:w-10 md:h-10 bg-gray-800 rounded-lg flex items-center justify-center">
+            <UIcon name="i-lucide-hash" class="w-4 h-4 md:w-5 md:h-5 text-gray-400" />
           </div>
-          <span class="text-sm text-gray-400">Total de Apostas</span>
+          <span class="text-xs md:text-sm text-gray-400">Total</span>
         </div>
-        <p class="text-3xl font-bold">{{ betHistoryStore.totalBets }}</p>
+        <p class="text-2xl md:text-3xl font-bold">{{ betHistoryStore.totalBets }}</p>
       </div>
 
       <!-- Wins -->
-      <div class="bg-gray-900 rounded-xl border border-gray-800 p-6">
-        <div class="flex items-center gap-3 mb-3">
-          <div class="w-10 h-10 bg-emerald-500/20 rounded-lg flex items-center justify-center">
-            <UIcon name="i-lucide-trophy" class="w-5 h-5 text-emerald-400" />
+      <div class="bg-gray-900 rounded-xl border border-gray-800 p-4 md:p-6">
+        <div class="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
+          <div class="w-8 h-8 md:w-10 md:h-10 bg-emerald-500/20 rounded-lg flex items-center justify-center">
+            <UIcon name="i-lucide-trophy" class="w-4 h-4 md:w-5 md:h-5 text-emerald-400" />
           </div>
-          <span class="text-sm text-gray-400">Vitórias</span>
+          <span class="text-xs md:text-sm text-gray-400">Vitórias</span>
         </div>
-        <p class="text-3xl font-bold text-emerald-400">{{ betHistoryStore.totalWon }}</p>
+        <p class="text-2xl md:text-3xl font-bold text-emerald-400">{{ betHistoryStore.totalWon }}</p>
       </div>
 
       <!-- Losses -->
-      <div class="bg-gray-900 rounded-xl border border-gray-800 p-6">
-        <div class="flex items-center gap-3 mb-3">
-          <div class="w-10 h-10 bg-red-500/20 rounded-lg flex items-center justify-center">
-            <UIcon name="i-lucide-x-circle" class="w-5 h-5 text-red-400" />
+      <div class="bg-gray-900 rounded-xl border border-gray-800 p-4 md:p-6">
+        <div class="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
+          <div class="w-8 h-8 md:w-10 md:h-10 bg-red-500/20 rounded-lg flex items-center justify-center">
+            <UIcon name="i-lucide-x-circle" class="w-4 h-4 md:w-5 md:h-5 text-red-400" />
           </div>
           <span class="text-sm text-gray-400">Derrotas</span>
         </div>

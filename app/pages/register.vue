@@ -56,23 +56,23 @@ watch(
 </script>
 
 <template>
-  <div class="min-h-[80vh] flex items-center justify-center py-8">
+  <div class="min-h-[70vh] md:min-h-[80vh] flex items-center justify-center py-4 md:py-8 px-4">
     <div class="w-full max-w-md">
       <!-- Card -->
-      <div class="bg-gray-900 rounded-2xl border border-gray-800 p-8">
+      <div class="bg-gray-900 rounded-2xl border border-gray-800 p-5 md:p-8">
         <!-- Header -->
-        <div class="text-center mb-8">
-          <div class="w-16 h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <span class="text-3xl font-bold">G</span>
+        <div class="text-center mb-6 md:mb-8">
+          <div class="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-3 md:mb-4">
+            <span class="text-2xl md:text-3xl font-bold">G</span>
           </div>
-          <h1 class="text-2xl font-bold mb-2">Criar Conta</h1>
-          <p class="text-gray-400">Junte-se ao GabeBet e comece a jogar</p>
+          <h1 class="text-xl md:text-2xl font-bold mb-2">Criar Conta</h1>
+          <p class="text-gray-400 text-sm md:text-base">Junte-se ao GabeBet e comece a jogar</p>
         </div>
 
         <!-- Bonus Banner -->
-        <div class="mb-6 p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-center">
-          <p class="text-emerald-400 font-medium flex items-center justify-center gap-2">
-            <UIcon name="i-lucide-gift" class="w-5 h-5" />
+        <div class="mb-4 md:mb-6 p-3 md:p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-center">
+          <p class="text-emerald-400 font-medium flex items-center justify-center gap-2 text-sm md:text-base">
+            <UIcon name="i-lucide-gift" class="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
             Ganhe R$ 1.000,00 em créditos para começar!
           </p>
         </div>
