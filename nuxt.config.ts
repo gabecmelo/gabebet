@@ -11,6 +11,14 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   compatibilityDate: '2024-04-03',
 
+  // GitHub Pages configuration
+  ssr: false, // Static Site Generation
+  nitro: {
+    prerender: {
+      routes: ['/sitemap.xml']
+    }
+  },
+
   // CSS
   css: ['~/assets/css/main.css'],
 
@@ -25,8 +33,10 @@ export default defineNuxtConfig({
     fallback: 'dark',
   },
 
-  // App metadata (PT-BR)
+  // App metadata (PT-BR) with GitHub Pages baseURL
   app: {
+    baseURL: process.env.NODE_ENV === 'production' ? '/gabebet/' : '/',
+    buildAssetsDir: 'assets',
     head: {
       title: 'GabeBet - Plataforma de Apostas',
       meta: [
