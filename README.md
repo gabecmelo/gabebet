@@ -1,6 +1,8 @@
-# 🎲 GabeBet - Modern Betting Platform Prototype
+# 🎲 GabeBet - Protótipo de Plataforma de Apostas Moderna
 
-A high-fidelity frontend prototype for a modern betting platform, built with **Nuxt 3**, **TypeScript**, and **Tailwind CSS**. This project demonstrates a complete UI/UX for a betting application with simulated functionality.
+*[English version available](README-EN.md) | [Versão em Português](README.md)*
+
+Um protótipo frontend de alta fidelidade para uma plataforma de apostas moderna, construído com **Nuxt 4**, **TypeScript** e **Tailwind CSS**. Este projeto demonstra uma UI/UX completa para uma aplicação de apostas com funcionalidade simulada.
 
 ![Nuxt](https://img.shields.io/badge/Nuxt-4.x-00DC82?logo=nuxt.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript)
@@ -8,190 +10,190 @@ A high-fidelity frontend prototype for a modern betting platform, built with **N
 ![Vitest](https://img.shields.io/badge/Vitest-4.x-6E9F18?logo=vitest)
 ![Playwright](https://img.shields.io/badge/Playwright-1.x-2EAD33?logo=playwright)
 
-## ⚠️ Important Disclaimer
+## ⚠️ Aviso Importante
 
-> **IMPORTANT:** This is a **frontend prototype for demonstration purposes only**.
+> **IMPORTANTE:** Este é um **protótipo frontend apenas para fins de demonstração**.
 >
-> The game algorithms currently implemented are **simplified client-side simulations** designed for UI/UX demonstration. They are:
-> - Not cryptographically secure
-> - Not suitable for real betting applications
-> - Running entirely in the browser (client-side)
+> Os algoritmos de jogos atualmente implementados são **simulações simplificadas do lado do cliente** projetadas para demonstração de UI/UX. Eles são:
+> - Não criptograficamente seguros
+> - Não adequados para aplicações de apostas reais
+> - Executados inteiramente no navegador (lado do cliente)
 >
-> **The real backend**, featuring proprietary algorithms, provably fair mechanics, and a microservices architecture (Java/Spring), is under active development. The production system will include:
-> - Server-side random number generation with cryptographic security
-> - Provably fair verification systems
-> - Comprehensive audit trails
-> - Regulatory compliance measures
+> **O backend real**, apresentando algoritmos proprietários, mecânicas comprovadamente justas e uma arquitetura de microsserviços (Java/Spring), está em desenvolvimento ativo. O sistema de produção incluirá:
+> - Geração de números aleatórios do lado do servidor com segurança criptográfica
+> - Sistemas de verificação comprovadamente justos
+> - Trilhas de auditoria abrangentes
+> - Medidas de conformidade regulatória
 
-## 🎯 Project Goal
+## 🎯 Objetivo do Projeto
 
-Build a complete, responsive frontend for "GabeBet" - a modern betting platform simulation. The project focuses on:
+Construir um frontend completo e responsivo para "GabeBet" - uma simulação de plataforma de apostas moderna. O projeto foca em:
 
-- **Test-Driven Development (TDD)** methodology
-- **Modular and scalable** architecture
-- **Premium dark mode** design (inspired by Stake, Blaze)
-- **Portuguese (PT-BR)** user interface
-- **English** codebase (variables, comments, documentation)
+- Metodologia **Test-Driven Development (TDD)**
+- Arquitetura **modular e escalável**
+- Design **premium em modo escuro** (inspirado em Stake, Blaze)
+- Interface de usuário em **Português (PT-BR)**
+- Código base em **Inglês** (variáveis, comentários, documentação)
 
-## 🚀 Features
+## 🚀 Funcionalidades
 
-### Current Features
-- ✅ **Dice Game** - Bet over/under with dynamic multipliers
-- ✅ **Mock Authentication** - Register/Login with localStorage
-- ✅ **Bet History** - Track all bets with statistics
-- ✅ **Responsive Layout** - Sidebar navigation, mobile-ready
-- ✅ **Dark Mode UI** - Premium gaming aesthetic
+### Funcionalidades Atuais
+- ✅ **Jogo de Dados** - Aposte em maior/menor com multiplicadores dinâmicos
+- ✅ **Autenticação Simulada** - Registro/Login com localStorage
+- ✅ **Histórico de Apostas** - Rastreie todas as apostas com estatísticas
+- ✅ **Layout Responsivo** - Navegação lateral, pronto para mobile
+- ✅ **UI Modo Escuro** - Estética premium de jogos
 
-### Coming Soon
-- 🔜 Crash Game
-- 🔜 Slots Game
-- 🔜 User Profile
-- 🔜 Internationalization (i18n)
+### Em Breve
+- 🔜 Jogo Crash
+- 🔜 Jogo de Slots
+- 🔜 Perfil do Usuário
+- 🔜 Internacionalização (i18n)
 
-## 🛠️ Tech Stack
+## 🛠️ Stack Tecnológico
 
-| Category | Technology |
-|----------|------------|
+| Categoria | Tecnologia |
+|-----------|------------|
 | Framework | Nuxt 4 (Vue 3, Composition API) |
-| Language | TypeScript (Strict mode) |
-| Styling | Tailwind CSS 4 + Nuxt UI |
-| State Management | Pinia |
-| Unit Testing | Vitest + Vue Test Utils |
-| E2E Testing | Playwright |
-| Icons | Lucide Icons |
+| Linguagem | TypeScript (Modo estrito) |
+| Estilização | Tailwind CSS 4 + Nuxt UI |
+| Gerenciamento de Estado | Pinia |
+| Testes Unitários | Vitest + Vue Test Utils |
+| Testes E2E | Playwright |
+| Ícones | Lucide Icons |
 
-## 📁 Project Structure
+## 📁 Estrutura do Projeto
 
 ```
 gabebet/
 ├── app/
-│   ├── components/        # Reusable Vue components
-│   ├── layouts/           # Page layouts (default)
+│   ├── components/        # Componentes Vue reutilizáveis
+│   ├── layouts/           # Layouts de página (padrão)
 │   ├── logic/
-│   │   └── algorithms/    # Game algorithms (dice, crash, etc.)
-│   ├── pages/             # Route pages
-│   │   ├── games/         # Game pages
+│   │   └── algorithms/    # Algoritmos de jogos (dados, crash, etc.)
+│   ├── pages/             # Páginas de rota
+│   │   ├── games/         # Páginas de jogos
 │   │   └── ...
-│   ├── plugins/           # Nuxt plugins (Pinia)
-│   ├── services/          # Mock services (auth)
-│   ├── stores/            # Pinia stores
-│   └── types/             # TypeScript type definitions
+│   ├── plugins/           # Plugins Nuxt (Pinia)
+│   ├── services/          # Serviços simulados (auth)
+│   ├── stores/            # Stores Pinia
+│   └── types/             # Definições de tipos TypeScript
 ├── test/
-│   └── unit/              # Unit tests (Vitest)
-├── tests/                 # E2E tests (Playwright)
-└── ...config files
+│   └── unit/              # Testes unitários (Vitest)
+├── tests/                 # Testes E2E (Playwright)
+└── ...arquivos de configuração
 ```
 
-## 🏃‍♂️ Getting Started
+## 🏃‍♂️ Como Começar
 
-### Prerequisites
+### Pré-requisitos
 
-- Node.js 20.x or higher
-- pnpm (recommended) or npm
+- Node.js 20.x ou superior
+- pnpm (recomendado) ou npm
 
-### Installation
+### Instalação
 
 ```bash
-# Clone the repository
-git clone https://github.com/your-username/gabebet.git
+# Clonar o repositório
+git clone https://github.com/gabecmelo/gabebet.git
 cd gabebet
 
-# Install dependencies
+# Instalar dependências
 pnpm install
 
-# Start development server
+# Iniciar servidor de desenvolvimento
 pnpm dev
 ```
 
-The app will be available at `http://localhost:3000`
+O app estará disponível em `http://localhost:3000`
 
-## 🧪 Testing
+## 🧪 Testes
 
-### Unit Tests (Vitest)
+### Testes Unitários (Vitest)
 
 ```bash
-# Run unit tests once
+# Executar testes unitários uma vez
 pnpm test
 
-# Run tests in watch mode
+# Executar testes em modo observação
 pnpm test:watch
 
-# Run tests with coverage
+# Executar testes com cobertura
 pnpm test:coverage
 ```
 
-### E2E Tests (Playwright)
+### Testes E2E (Playwright)
 
 ```bash
-# Run E2E tests
+# Executar testes E2E
 pnpm test:e2e
 
-# Run E2E tests with UI
+# Executar testes E2E com UI
 pnpm test:e2e:ui
 
-# Install Playwright browsers (first time only)
+# Instalar navegadores Playwright (apenas primeira vez)
 npx playwright install
 ```
 
-## 📝 Development Workflow
+## 📝 Fluxo de Desenvolvimento
 
-This project follows **strict TDD (Test-Driven Development)**:
+Este projeto segue **TDD (Test-Driven Development) rigoroso**:
 
-1. **Red** - Write a failing test first
-2. **Green** - Implement minimum code to pass
-3. **Refactor** - Clean up and optimize
+1. **Vermelho** - Escrever um teste que falha primeiro
+2. **Verde** - Implementar código mínimo para passar
+3. **Refatorar** - Limpar e otimizar
 
-### Key Principles
+### Princípios Chave
 
-- ✅ **Incremental Compilation** - Verify build after each change
-- ✅ **Self-Correction** - Fix breaks before proceeding
-- ✅ **Don't Reinvent the Wheel** - Use existing libraries when appropriate
-- ✅ **Avoid Overengineering** - Focus on essentials
+- ✅ **Compilação Incremental** - Verificar build após cada mudança
+- ✅ **Auto-Correção** - Corrigir problemas antes de prosseguir
+- ✅ **Não Reinvente a Roda** - Usar bibliotecas existentes quando apropriado
+- ✅ **Evitar Sobre-engenharia** - Focar no essencial
 
-## 🎮 Game Algorithms
+## 🎮 Algoritmos de Jogos
 
-All game logic is isolated in `app/logic/algorithms/`:
+Toda lógica de jogo está isolada em `app/logic/algorithms/`:
 
-### Dice (`dice.ts`)
+### Dados (`dice.ts`)
 
 ```typescript
-// Example usage
+// Exemplo de uso
 import { placeDiceBet } from '~/logic/algorithms/dice'
 
 const result = placeDiceBet(100, 50, 'over')
 // result: { roll: 73, won: true, payout: 198, multiplier: 1.98 }
 ```
 
-**Note:** These algorithms are simplified simulations. The actual betting backend will use secure server-side implementations.
+**Nota:** Estes algoritmos são simulações simplificadas. O backend real de apostas usará implementações seguras do lado do servidor.
 
-## 🌐 Internationalization
+## 🌐 Internacionalização
 
-The UI is in **Portuguese (PT-BR)**, but the codebase is structured for future i18n expansion:
+A UI está em **Português (PT-BR)**, mas o código base está estruturado para expansão i18n futura:
 
-- All user-facing text is in components
-- Type definitions and logic use English
-- Ready for `@nuxtjs/i18n` integration
+- Todo texto visível ao usuário está nos componentes
+- Definições de tipos e lógica usam Inglês
+- Pronto para integração com `@nuxtjs/i18n`
 
-## 🤝 Contributing
+## 🤝 Contribuindo
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Write tests first (TDD)
-4. Implement your changes
-5. Ensure all tests pass
-6. Commit with conventional commits (`feat:`, `fix:`, `test:`)
-7. Push and create a Pull Request
+1. Faça fork do repositório
+2. Crie uma branch de funcionalidade (`git checkout -b feature/funcionalidade-incrivel`)
+3. Escreva testes primeiro (TDD)
+4. Implemente suas mudanças
+5. Certifique-se de que todos os testes passam
+6. Commit com commits convencionais (`feat:`, `fix:`, `test:`)
+7. Push e crie um Pull Request
 
-## 📄 License
+## 📄 Licença
 
-This project is for demonstration purposes. All rights reserved.
+Este projeto é para fins de demonstração. Todos os direitos reservados.
 
-## 👤 Author
+## 👤 Autor
 
-**GabeBet Team**
+**Equipe GabeBet**
 
 ---
 
 <p align="center">
-  <strong>🎰 Play responsibly. This is a simulation only. 🎰</strong>
+  <strong>🎰 Jogue com responsabilidade. Esta é apenas uma simulação. 🎰</strong>
 </p>
