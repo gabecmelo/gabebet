@@ -296,4 +296,60 @@ test.describe('Layout Overflow', () => {
       expect(collapsedRect.width).toBeGreaterThan(initialRect.width)
     }
   })
+
+  test('should have centered content on mobile viewport', async ({ page, goto }) => {
+    // Set mobile viewport
+    await page.setViewportSize({ width: 375, height: 667 })
+    
+    await goto('/', { waitUntil: 'hydration' })
+    await page.waitForTimeout(500)
+    
+    // Get the main content inner container (max-w-7xl mx-auto)
+    const contentContainer = page.locator('main > div')
+    const containerRect = await contentContainer.boundingBox()
+    
+    expect(containerRect).not.toBeNull()
+    if (containerRect) {
+      // Check that left margin is approximately equal to right margin (centered)
+      const leftMargin = containerRect.x
+      const rightMargin = 375 - (containerRect.x + containerRect.width)
+      
+      // Allow 20px tolerance for padding differences
+      expect(Math.abs(leftMargin - rightMargin)).toBeLessThanOrEqual(20)
+    }
+  })
+
+  test('should have centered login overlay on dice game mobile', async ({ page, goto }) => {
+    await page.setViewportSize({ width: 375, height: 667 })
+    
+    await goto('/games/dice', { waitUntil: 'hydration' })
+    await page.waitForTimeout(500)
+    
+    // Find the "Faça login para jogar" overlay
+    const overlay = page.locator('text=Faça login para jogar').locator('..')
+    const overlayRect = await overlay.boundingBox()
+    
+    expect(overlayRect).not.toBeNull()
+    if (overlayRect) {
+      // Check centering
+      const leftMargin = overlayRect.x
+      const rightMargin = 375 - (overlayRect.x + overlayRect.width)
+      
+      // Should be approximately centered (within 30px)
+      expect(Math.abs(leftMargin - rightMargin)).toBeLessThanOrEqual(30)
+    }
+  })
+
+  test('should have no horizontal overflow on mobile home page', async ({ page, goto }) => {
+    await page.setViewportSize({ width: 375, height: 667 })
+    
+    await goto('/', { waitUntil: 'hydration' })
+    
+    // Check for horizontal scroll
+    const hasHorizontalScroll = await page.evaluate(() => {
+      return document.documentElement.scrollWidth > document.documentElement.clientWidth
+    })
+    
+    expect(hasHorizontalScroll).toBe(false)
+  })
 })

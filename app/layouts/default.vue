@@ -221,7 +221,7 @@ watch(() => route.path, () => {
     <!-- Desktop Sidebar -->
     <aside
       :class="[
-        'hidden md:block fixed left-0 top-0 h-full bg-gray-900 border-r border-gray-800 transition-all duration-300 z-40',
+        'hidden md:flex md:flex-col flex-shrink-0 bg-gray-900 border-r border-gray-800 transition-all duration-300 z-40 h-full',
         isSidebarOpen ? 'w-64' : 'w-20'
       ]"
     >
@@ -282,7 +282,7 @@ watch(() => route.path, () => {
       </nav>
 
       <!-- Bottom Navigation -->
-      <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-800">
+      <div class="mt-auto p-4 border-t border-gray-800">
         <NuxtLink
           v-for="item in bottomNavigationItems"
           :key="item.path"
@@ -314,14 +314,10 @@ watch(() => route.path, () => {
 
     <!-- Main Content -->
     <div 
-      :class="[
-        'flex-1 transition-all duration-300 w-full overflow-x-hidden',
-        'pt-14 md:pt-0', // Mobile header offset
-        isSidebarOpen ? 'md:ml-64' : 'md:ml-20'
-      ]"
+      class="flex-1 flex flex-col min-w-0 w-full transition-all duration-300 pt-14 md:pt-0"
     >
       <!-- Desktop Header -->
-      <header class="hidden md:flex h-16 bg-gray-900/80 backdrop-blur-sm border-b border-gray-800 items-center justify-between px-6 sticky top-0 z-30 max-w-content">
+      <header class="hidden md:flex h-16 bg-gray-900/80 backdrop-blur-sm border-b border-gray-800 items-center justify-between px-6 flex-shrink-0 z-30">
         <div class="flex items-center gap-4">
           <button
             v-if="!isSidebarOpen"
@@ -389,8 +385,10 @@ watch(() => route.path, () => {
       </header>
 
       <!-- Page Content -->
-      <main class="p-4 md:p-6 w-full min-w-0 max-w-[93vw] overflow-x-hidden">
-        <slot />
+      <main class="flex-1 p-4 md:p-6 w-full overflow-y-auto">
+        <div class="w-full max-w-7xl mx-auto">
+          <slot />
+        </div>
       </main>
     </div>
   </div>
