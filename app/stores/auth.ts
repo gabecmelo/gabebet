@@ -106,8 +106,10 @@ export const useAuthStore = defineStore('auth', {
         this.user = null
         this.isAuthenticated = false
         this.error = null
+        return { success: true }
       } catch (error) {
         console.error('Failed to logout:', error)
+        return { success: false }
       } finally {
         this.isLoading = false
       }

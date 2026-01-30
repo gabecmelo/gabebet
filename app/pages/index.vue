@@ -45,7 +45,7 @@ const featuredGames = [
 </script>
 
 <template>
-  <div class="max-w-6xl mx-auto w-full">
+  <div class="w-full min-w-0">
     <!-- Hero Section -->
     <section class="mb-8 md:mb-12">
       <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-5 md:p-8 border border-gray-700 relative overflow-hidden">
@@ -68,7 +68,7 @@ const featuredGames = [
 
           <div v-if="!authStore.isAuthenticated" class="flex flex-col sm:flex-row gap-3 md:gap-4">
             <NuxtLink to="/register" class="w-full sm:w-auto">
-              <UButton size="lg" class="bg-emerald-500 hover:bg-emerald-600 w-full sm:w-auto">
+              <UButton size="lg" class="font-semibold text-gray-200 bg-emerald-500 hover:bg-emerald-600 w-full sm:w-auto">
                 <UIcon name="i-lucide-rocket" class="w-5 h-5 mr-2" />
                 Começar Agora
               </UButton>
@@ -82,7 +82,7 @@ const featuredGames = [
 
           <div v-else class="flex flex-col sm:flex-row gap-3 md:gap-4">
             <NuxtLink to="/games/dice" class="w-full sm:w-auto">
-              <UButton size="lg" class="bg-emerald-500 hover:bg-emerald-600 w-full sm:w-auto">
+              <UButton size="lg" class="font-semibold text-gray-200 bg-emerald-500 hover:bg-emerald-600 w-full sm:w-auto">
                 <UIcon name="i-lucide-play" class="w-5 h-5 mr-2" />
                 Jogar Dados
               </UButton>
@@ -105,7 +105,7 @@ const featuredGames = [
         Jogos em Destaque
       </h2>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-full">
         <div
           v-for="game in featuredGames"
           :key="game.id"

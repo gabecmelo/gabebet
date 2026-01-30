@@ -153,7 +153,7 @@ watch(() => authStore.user, (user) => {
 </script>
 
 <template>
-  <div class="max-w-6xl mx-auto w-full">
+  <div class="w-full min-w-0">
     <!-- Header -->
     <div class="mb-6 md:mb-8">
       <h1 class="text-2xl md:text-3xl font-bold flex items-center gap-3">

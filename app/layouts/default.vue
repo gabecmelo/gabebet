@@ -11,6 +11,7 @@ import { useAuthStore } from '~/stores/auth'
 
 const authStore = useAuthStore()
 const route = useRoute()
+const router = useRouter()
 
 // Initialize auth on mount (client-side only)
 onMounted(async () => {
@@ -50,6 +51,13 @@ function closeMobileMenu() {
 
 function isActiveRoute(path: string): boolean {
   return route.path === path
+}
+
+// Logout handler with redirect
+async function handleLogout() {
+  await authStore.logout()
+  closeMobileMenu()
+  await router.push('/')
 }
 
 // Close mobile menu on route change
@@ -146,7 +154,6 @@ watch(() => route.path, () => {
             <span class="font-medium">{{ item.name }}</span>
           </NuxtLink>
         </nav>
-
         <!-- Auth Actions (Mobile) -->
         <div class="p-4 border-t border-gray-800">
           <template v-if="authStore.isAuthenticated">
@@ -161,7 +168,7 @@ watch(() => route.path, () => {
             </div>
             <button
               class="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-red-400 hover:bg-red-500/10 transition-colors"
-              @click="authStore.logout(); closeMobileMenu()"
+              @click="handleLogout"
             >
               <UIcon name="i-lucide-log-out" class="w-5 h-5" />
               <span class="font-medium">Sair</span>
@@ -314,7 +321,7 @@ watch(() => route.path, () => {
       ]"
     >
       <!-- Desktop Header -->
-      <header class="hidden md:flex h-16 bg-gray-900/80 backdrop-blur-sm border-b border-gray-800 items-center justify-between px-6 sticky top-0 z-30">
+      <header class="hidden md:flex h-16 bg-gray-900/80 backdrop-blur-sm border-b border-gray-800 items-center justify-between px-6 sticky top-0 z-30 max-w-content">
         <div class="flex items-center gap-4">
           <button
             v-if="!isSidebarOpen"
@@ -348,7 +355,7 @@ watch(() => route.path, () => {
                   { label: 'Histórico', icon: 'i-lucide-history', to: '/history' },
                 ],
                 [
-                  { label: 'Sair', icon: 'i-lucide-log-out', onSelect: () => authStore.logout() },
+                  { label: 'Sair', icon: 'i-lucide-log-out', onSelect: handleLogout },
                 ],
               ]"
             >
@@ -382,7 +389,7 @@ watch(() => route.path, () => {
       </header>
 
       <!-- Page Content -->
-      <main class="p-4 md:p-6 w-full max-w-full">
+      <main class="p-4 md:p-6 w-full min-w-0 max-w-[93vw] overflow-x-hidden">
         <slot />
       </main>
     </div>

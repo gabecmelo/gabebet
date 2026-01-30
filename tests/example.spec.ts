@@ -143,3 +143,71 @@ test.describe('Navigation', () => {
     await expect(sidebar).toHaveClass(/w-20/)
   })
 })
+
+test.describe('Logout Flow', () => {
+  test('should logout and redirect to home page', async ({ page, goto }) => {
+    // First register and login a user
+    await goto('/register', { waitUntil: 'hydration' })
+    
+    const timestamp = Date.now()
+    await page.fill('input[placeholder="jogador123"]', `logoutuser${timestamp}`)
+    await page.fill('input[placeholder="seu@email.com"]', `logout${timestamp}@email.com`)
+    const passwordFields = page.locator('input[type="password"]')
+    await passwordFields.nth(0).fill('password123')
+    await passwordFields.nth(1).fill('password123')
+    await page.click('button:has-text("Criar Conta")')
+    
+    // Wait for redirect to home
+    await expect(page).toHaveURL('/', { timeout: 10000 })
+    
+    // Verify user is logged in (balance is visible)
+    await expect(page.locator('text=R$')).toBeVisible({ timeout: 5000 })
+    
+    // Click on user menu dropdown
+    const userMenuButton = page.locator('header').locator('button:has(div.bg-gradient-to-br)')
+    await userMenuButton.click()
+    
+    // Click on "Sair" (logout)
+    await page.click('text=Sair')
+    
+    // Should redirect to home page
+    await expect(page).toHaveURL('/', { timeout: 10000 })
+    
+    // Verify "Entrar" button is visible again (user is logged out)
+    await expect(page.locator('header >> text=Entrar')).toBeVisible({ timeout: 5000 })
+  })
+
+  test('should logout from mobile menu', async ({ page, goto }) => {
+    // Set mobile viewport
+    await page.setViewportSize({ width: 375, height: 667 })
+    
+    // First register and login a user
+    await goto('/register', { waitUntil: 'hydration' })
+    
+    const timestamp = Date.now()
+    await page.fill('input[placeholder="jogador123"]', `mobilelogout${timestamp}`)
+    await page.fill('input[placeholder="seu@email.com"]', `mobilelogout${timestamp}@email.com`)
+    const passwordFields = page.locator('input[type="password"]')
+    await passwordFields.nth(0).fill('password123')
+    await passwordFields.nth(1).fill('password123')
+    await page.click('button:has-text("Criar Conta")')
+    
+    // Wait for redirect to home
+    await expect(page).toHaveURL('/', { timeout: 10000 })
+    
+    // Open mobile menu (hamburger)
+    await page.click('button[aria-label="Abrir menu"]')
+    
+    // Click on "Sair" (logout) in mobile menu
+    await page.click('button:has-text("Sair")')
+    
+    // Should redirect to home page
+    await expect(page).toHaveURL('/', { timeout: 10000 })
+    
+    // Open mobile menu again to verify logged out state
+    await page.click('button[aria-label="Abrir menu"]')
+    
+    // Verify "Entrar" button is visible in mobile menu
+    await expect(page.locator('text=Entrar')).toBeVisible({ timeout: 5000 })
+  })
+})
