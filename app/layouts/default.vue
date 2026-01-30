@@ -67,7 +67,7 @@ watch(() => route.path, () => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-950 text-white overflow-x-hidden">
+  <div class="flex h-screen bg-gray-950 text-white overflow-hidden">
     <!-- Mobile Header -->
     <header class="md:hidden fixed top-0 left-0 right-0 h-14 bg-gray-900 border-b border-gray-800 flex items-center justify-between px-4 z-50">
       <!-- Logo -->

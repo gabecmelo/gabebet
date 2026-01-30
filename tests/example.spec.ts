@@ -211,3 +211,89 @@ test.describe('Logout Flow', () => {
     await expect(page.locator('text=Entrar')).toBeVisible({ timeout: 5000 })
   })
 })
+
+test.describe('Layout Overflow', () => {
+  test('should not have horizontal overflow on desktop with sidebar expanded', async ({ page, goto }) => {
+    // Set desktop viewport
+    await page.setViewportSize({ width: 1280, height: 800 })
+    
+    await goto('/games/dice', { waitUntil: 'hydration' })
+    
+    // Wait for layout to render
+    await page.waitForTimeout(500)
+    
+    // Check that main content doesn't exceed viewport
+    const mainContent = page.locator('main')
+    const mainRect = await mainContent.boundingBox()
+    
+    expect(mainRect).not.toBeNull()
+    if (mainRect) {
+      expect(mainRect.x + mainRect.width).toBeLessThanOrEqual(1280)
+    }
+    
+    // Check header doesn't overflow
+    const header = page.locator('header').first()
+    const headerRect = await header.boundingBox()
+    
+    if (headerRect) {
+      expect(headerRect.x + headerRect.width).toBeLessThanOrEqual(1280)
+    }
+  })
+
+  test('should not have horizontal overflow on desktop with sidebar collapsed', async ({ page, goto }) => {
+    await page.setViewportSize({ width: 1280, height: 800 })
+    
+    await goto('/games/dice', { waitUntil: 'hydration' })
+    
+    // Collapse sidebar
+    await page.click('button[aria-label="Fechar menu"]')
+    await page.waitForTimeout(500)
+    
+    // Check that main content doesn't exceed viewport
+    const mainContent = page.locator('main')
+    const mainRect = await mainContent.boundingBox()
+    
+    expect(mainRect).not.toBeNull()
+    if (mainRect) {
+      expect(mainRect.x + mainRect.width).toBeLessThanOrEqual(1280)
+    }
+  })
+
+  test('should not have horizontal scrolling on dice game page', async ({ page, goto }) => {
+    await page.setViewportSize({ width: 1024, height: 768 })
+    
+    await goto('/games/dice', { waitUntil: 'hydration' })
+    
+    // Check for horizontal scroll
+    const hasHorizontalScroll = await page.evaluate(() => {
+      return document.documentElement.scrollWidth > document.documentElement.clientWidth
+    })
+    
+    expect(hasHorizontalScroll).toBe(false)
+  })
+
+  test('should adapt content when sidebar toggles', async ({ page, goto }) => {
+    await page.setViewportSize({ width: 1280, height: 800 })
+    
+    await goto('/', { waitUntil: 'hydration' })
+    
+    // Get initial main content width with sidebar open
+    const mainContent = page.locator('main')
+    const initialRect = await mainContent.boundingBox()
+    
+    // Collapse sidebar
+    await page.click('button[aria-label="Fechar menu"]')
+    await page.waitForTimeout(400)
+    
+    // Get new main content width
+    const collapsedRect = await mainContent.boundingBox()
+    
+    expect(initialRect).not.toBeNull()
+    expect(collapsedRect).not.toBeNull()
+    
+    if (initialRect && collapsedRect) {
+      // Main content should be wider when sidebar is collapsed
+      expect(collapsedRect.width).toBeGreaterThan(initialRect.width)
+    }
+  })
+})
