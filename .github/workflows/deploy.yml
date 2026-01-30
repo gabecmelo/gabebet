@@ -40,6 +40,9 @@ jobs:
     - name: Install dependencies
       run: pnpm install --frozen-lockfile
       
+    - name: Prepare Nuxt
+      run: pnpm run postinstall
+      
     - name: Run tests
       run: pnpm test
       
