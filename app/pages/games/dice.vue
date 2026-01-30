@@ -31,6 +31,10 @@ const betAmount = ref(10)
 const isRolling = ref(false)
 const lastResult = ref<DiceBetResult | null>(null)
 const showResult = ref(false)
+const showResultModal = ref(false)
+
+// Template ref for result section
+const resultSection = ref<HTMLElement | null>(null)
 
 // Computed values
 const multiplier = computed(() => 
@@ -118,6 +122,16 @@ async function placeBet() {
     })
 
     showResult.value = true
+    
+    // Show modal on mobile and scroll to result
+    showResultModal.value = true
+    
+    // Scroll to result section
+    nextTick(() => {
+      if (resultSection.value) {
+        resultSection.value.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    })
   } finally {
     isRolling.value = false
   }
@@ -327,9 +341,9 @@ watch(() => authStore.user, (user) => {
       </div>
 
       <!-- Game Display -->
-      <div class="lg:col-span-2 order-1 lg:order-2">
+      <div ref="resultSection" class="lg:col-span-2 order-1 lg:order-2">
         <!-- Result Display -->
-        <div class="bg-gray-900 rounded-2xl border border-gray-800 p-6 md:p-8 min-h-[280px] md:min-h-[400px] flex items-center justify-center">
+        <div class="bg-gray-900 rounded-2xl border border-gray-800 p-6 md:p-8 min-h-[200px] md:min-h-[400px] flex items-center justify-center">
           <div v-if="isRolling" class="text-center">
             <div class="w-24 h-24 md:w-32 md:h-32 mx-auto mb-4 md:mb-6 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-3xl flex items-center justify-center animate-bounce">
               <UIcon name="i-lucide-dice-5" class="w-12 h-12 md:w-16 md:h-16 animate-spin" />
@@ -353,40 +367,40 @@ watch(() => authStore.user, (user) => {
             <!-- Result Text -->
             <div
               :class="[
-                'text-3xl font-bold mb-4',
+                'text-2xl md:text-3xl font-bold mb-3 md:mb-4',
                 lastResult.won ? 'text-emerald-400' : 'text-red-400'
               ]"
             >
               {{ lastResult.won ? 'VOCÊ GANHOU!' : 'VOCÊ PERDEU' }}
             </div>
 
-            <p class="text-gray-400 mb-4">
+            <p class="text-gray-400 mb-3 md:mb-4 text-sm md:text-base">
               Resultado: <span class="font-bold text-white">{{ lastResult.roll }}</span>
               {{ lastResult.betType === 'over' ? '>' : '<' }}
               <span class="font-bold text-white">{{ lastResult.target }}</span>
             </p>
 
-            <div v-if="lastResult.won" class="text-2xl font-bold text-yellow-400">
+            <div v-if="lastResult.won" class="text-xl md:text-2xl font-bold text-yellow-400">
               + R$ {{ lastResult.payout.toFixed(2) }}
             </div>
-            <div v-else class="text-2xl font-bold text-red-400">
+            <div v-else class="text-xl md:text-2xl font-bold text-red-400">
               - R$ {{ lastResult.betAmount.toFixed(2) }}
             </div>
           </div>
 
           <div v-else class="text-center">
-            <div class="w-32 h-32 mx-auto mb-6 bg-gray-800 rounded-3xl flex items-center justify-center">
-              <UIcon name="i-lucide-dice-5" class="w-16 h-16 text-gray-600" />
+            <div class="w-24 h-24 md:w-32 md:h-32 mx-auto mb-4 md:mb-6 bg-gray-800 rounded-3xl flex items-center justify-center">
+              <UIcon name="i-lucide-dice-5" class="w-12 h-12 md:w-16 md:h-16 text-gray-600" />
             </div>
-            <p class="text-xl text-gray-400">Faça sua aposta para começar</p>
-            <p class="text-sm text-gray-500 mt-2">
+            <p class="text-lg md:text-xl text-gray-400">Faça sua aposta para começar</p>
+            <p class="text-xs md:text-sm text-gray-500 mt-2">
               Escolha o valor, alvo e tipo de aposta
             </p>
           </div>
         </div>
 
-        <!-- Recent Bets -->
-        <div class="mt-6 bg-gray-900 rounded-2xl border border-gray-800 p-6">
+        <!-- Recent Bets (Desktop only) -->
+        <div class="hidden lg:block mt-6 bg-gray-900 rounded-2xl border border-gray-800 p-6">
           <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
             <UIcon name="i-lucide-history" class="w-5 h-5 text-gray-400" />
             Apostas Recentes
@@ -431,6 +445,127 @@ watch(() => authStore.user, (user) => {
           </div>
         </div>
       </div>
+
+      <!-- Recent Bets (Mobile only - after betting panel) -->
+      <div class="lg:hidden order-3 mt-4 bg-gray-900 rounded-2xl border border-gray-800 p-4">
+        <h3 class="text-base font-bold mb-3 flex items-center gap-2">
+          <UIcon name="i-lucide-history" class="w-4 h-4 text-gray-400" />
+          Apostas Recentes
+        </h3>
+
+        <div v-if="betHistoryStore.recentBets.length === 0" class="text-center py-6 text-gray-500">
+          <UIcon name="i-lucide-inbox" class="w-10 h-10 mx-auto mb-2 opacity-50" />
+          <p class="text-sm">Nenhuma aposta ainda</p>
+        </div>
+
+        <div v-else class="space-y-2">
+          <div
+            v-for="bet in betHistoryStore.recentBets.slice(0, 5)"
+            :key="bet.id"
+            :class="[
+              'flex items-center justify-between p-2.5 rounded-xl',
+              bet.won ? 'bg-emerald-500/10' : 'bg-red-500/10'
+            ]"
+          >
+            <div class="flex items-center gap-2">
+              <div
+                :class="[
+                  'w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm',
+                  bet.won ? 'bg-emerald-500/20 text-emerald-400' : 'bg-red-500/20 text-red-400'
+                ]"
+              >
+                {{ (bet.details as any)?.roll ?? '?' }}
+              </div>
+              <div>
+                <p class="text-xs">
+                  {{ (bet.details as any)?.betType === 'over' ? 'Maior' : 'Menor' }} que {{ (bet.details as any)?.target }}
+                </p>
+                <p class="text-xs text-gray-500">
+                  R$ {{ bet.amount.toFixed(2) }} × {{ bet.multiplier }}
+                </p>
+              </div>
+            </div>
+            <div :class="bet.won ? 'text-emerald-400' : 'text-red-400'" class="font-bold text-sm">
+              {{ bet.won ? '+' : '-' }} R$ {{ bet.won ? bet.payout.toFixed(2) : bet.amount.toFixed(2) }}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <!-- Mobile Result Modal/Popup -->
+    <Teleport to="body">
+      <Transition
+        enter-active-class="transition-all duration-300 ease-out"
+        enter-from-class="opacity-0"
+        enter-to-class="opacity-100"
+        leave-active-class="transition-all duration-200 ease-in"
+        leave-from-class="opacity-100"
+        leave-to-class="opacity-0"
+      >
+        <div
+          v-if="showResultModal && lastResult && showResult"
+          class="lg:hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
+          @click="showResultModal = false"
+        >
+          <Transition
+            enter-active-class="transition-all duration-300 ease-out"
+            enter-from-class="opacity-0 scale-90"
+            enter-to-class="opacity-100 scale-100"
+            leave-active-class="transition-all duration-200 ease-in"
+            leave-from-class="opacity-100 scale-100"
+            leave-to-class="opacity-0 scale-90"
+          >
+            <div
+              v-if="showResultModal"
+              class="bg-gray-900 rounded-2xl border border-gray-700 p-6 w-full max-w-sm text-center"
+              @click.stop
+            >
+              <!-- Result Icon -->
+              <div
+                :class="[
+                  'w-20 h-20 mx-auto mb-4 rounded-2xl flex items-center justify-center text-4xl font-black',
+                  lastResult.won
+                    ? 'bg-gradient-to-br from-emerald-500 to-emerald-600'
+                    : 'bg-gradient-to-br from-red-500 to-red-600'
+                ]"
+              >
+                {{ lastResult.roll }}
+              </div>
+
+              <!-- Result Text -->
+              <div
+                :class="[
+                  'text-2xl font-bold mb-2',
+                  lastResult.won ? 'text-emerald-400' : 'text-red-400'
+                ]"
+              >
+                {{ lastResult.won ? 'VOCÊ GANHOU!' : 'VOCÊ PERDEU' }}
+              </div>
+
+              <p class="text-gray-400 mb-3 text-sm">
+                Resultado: <span class="font-bold text-white">{{ lastResult.roll }}</span>
+                {{ lastResult.betType === 'over' ? '>' : '<' }}
+                <span class="font-bold text-white">{{ lastResult.target }}</span>
+              </p>
+
+              <div v-if="lastResult.won" class="text-xl font-bold text-yellow-400 mb-4">
+                + R$ {{ lastResult.payout.toFixed(2) }}
+              </div>
+              <div v-else class="text-xl font-bold text-red-400 mb-4">
+                - R$ {{ lastResult.betAmount.toFixed(2) }}
+              </div>
+
+              <UButton
+                class="flex justify-center font-semibold w-full bg-green-600 hover:bg-green-500 text-gray-200"
+                @click="showResultModal = false"
+              >
+                Continuar Jogando
+              </UButton>
+            </div>
+          </Transition>
+        </div>
+      </Transition>
+    </Teleport>
   </div>
 </template>

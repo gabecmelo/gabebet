@@ -81,7 +81,7 @@ watch(() => route.path, () => {
 
         <!-- Hamburger Menu -->
         <button
-          class="p-2 hover:bg-gray-800 rounded-lg transition-colors"
+          class="flex items p-2 hover:bg-gray-800 rounded-lg transition-colors"
           :aria-label="isMobileMenuOpen ? 'Fechar menu' : 'Abrir menu'"
           @click="toggleMobileMenu"
         >
