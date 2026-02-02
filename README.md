@@ -27,7 +27,7 @@ Um protótipo frontend de alta fidelidade para uma plataforma de apostas moderna
 
 ## Projeto Online
 
-Disponível em: ![Gabebet](https://gabecmelo.github.io/gabebet/)
+Disponível em: [GabeBet](https://gabecmelo.github.io/gabebet/)
 
 ## 🎯 Objetivo do Projeto
 
