@@ -25,13 +25,17 @@ Um protótipo frontend de alta fidelidade para uma plataforma de apostas moderna
 > - Trilhas de auditoria abrangentes
 > - Medidas de conformidade regulatória
 
+## Projeto Online
+
+Disponível em: ![Gabebet](https://gabecmelo.github.io/gabebet/)
+
 ## 🎯 Objetivo do Projeto
 
-Construir um frontend completo e responsivo para "GabeBet" - uma simulação de plataforma de apostas moderna. O projeto foca em:
+Frontend completo e responsivo para "GabeBet" - uma simulação de plataforma de apostas moderna. O projeto foca em:
 
 - Metodologia **Test-Driven Development (TDD)**
 - Arquitetura **modular e escalável**
-- Design **premium em modo escuro** (inspirado em Stake, Blaze)
+- Design **premium em modo escuro**
 - Interface de usuário em **Português (PT-BR)**
 - Código base em **Inglês** (variáveis, comentários, documentação)
 
@@ -49,6 +53,7 @@ Construir um frontend completo e responsivo para "GabeBet" - uma simulação de 
 - 🔜 Jogo de Slots
 - 🔜 Perfil do Usuário
 - 🔜 Internacionalização (i18n)
+- 🔜 Backend funcional implementado com microserviços próprios para sistema de apostas
 
 ## 🛠️ Stack Tecnológico
 
