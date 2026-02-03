@@ -195,7 +195,7 @@ Este projeto é para fins de demonstração. Todos os direitos reservados.
 
 ## 👤 Autor
 
-**Equipe GabeBet**
+**Equipe GabeBet (eu mesmo kkkkkkkkkkkkkkkkkk Gabriel Cabral Melo)**
 
 ---
 
